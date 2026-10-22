@@ -1,0 +1,4 @@
+Name;Age;City
+Ahmad;25;Kuopio
+Anna;22;Helsinki
+Maria;24;Joensuu
