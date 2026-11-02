@@ -1,0 +1,21 @@
+try:
+    with open("students_utf8.txt", "r", encoding="utf-8") as file:
+        print(file.read())
+
+except FileNotFoundError:
+    print("File not found")
+
+except UnicodeDecodeError:
+    print("Incorrect file encoding")
+
+
+def read_text_file(filepath, encoding="utf-8"):
+    try:
+        with open(filepath, "r", encoding=encoding) as file:
+            return file.read()
+    except (FileNotFoundError, UnicodeDecodeError) as error:
+        print(error)
+        return None
+
+content = read_text_file("Dataset/students_utf8.txt")
+print(content)
