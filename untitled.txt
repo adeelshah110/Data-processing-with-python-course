@@ -1,21 +1,17 @@
-try:
-    with open("students_utf8.txt", "r", encoding="utf-8") as file:
-        print(file.read())
+extracted_columns = [
+    "Extracted_Test_Name",
+    "Extracted_Result",
+    "Extracted_Unit",
+    "Extracted_Date_Text"
+]
 
-except FileNotFoundError:
-    print("File not found")
+extraction_summary = pd.DataFrame({
+    "field": extracted_columns,
+    "matched_records": [int(clean_df[col].notna().sum()) for col in extracted_columns]
+})
+extraction_summary["not_matched"] = len(clean_df) - extraction_summary["matched_records"]
+extraction_summary["match_percent"] = (
+    extraction_summary["matched_records"] / len(clean_df) * 100
+).round(2)
 
-except UnicodeDecodeError:
-    print("Incorrect file encoding")
-
-
-def read_text_file(filepath, encoding="utf-8"):
-    try:
-        with open(filepath, "r", encoding=encoding) as file:
-            return file.read()
-    except (FileNotFoundError, UnicodeDecodeError) as error:
-        print(error)
-        return None
-
-content = read_text_file("Dataset/students_utf8.txt")
-print(content)
+display(extraction_summary)

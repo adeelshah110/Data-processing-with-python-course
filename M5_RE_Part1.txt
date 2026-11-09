@@ -1,0 +1,63 @@
+text = """
+Contact John at john.smith@gmail.com
+Support: support@uef.fi
+Research: research_team123@hospital.org
+Student: ali123@gmail.com
+Invalid email: john@
+"""
+
+print("Original Text:\n", text)
+
+# Pattern 1: Find @ symbols
+print("\n1. Finding @ symbols:")
+print(re.findall(r"@", text))
+
+# Pattern 2: Find words
+print("\n2. Finding words:")
+print(re.findall(r"\w+", text))
+
+# Pattern 3: Find words ending with @
+print("\n3. Finding text before @:")
+print(re.findall(r"\w+@", text))
+
+# Pattern 4: Find username and domain without extension
+print("\n4. Finding username and domain:")
+print(re.findall(r"\w+@\w+", text))
+
+# Pattern 5: Find simple email addresses
+print("\n5. Simple email extraction:")
+print(re.findall(r"\w+@\w+\.\w+", text))
+
+# Pattern 6: Extract common email formats
+print("\n6. Complete email extraction:")
+pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+emails = re.findall(pattern, text)
+print(emails)
+
+# Pattern 7: Count extracted emails
+print("\n7. Number of emails:")
+print(len(emails))
+
+# Pattern 8: Extract emails without case sensitivity
+print("\n8. Case-insensitive email extraction:")
+print(re.findall(pattern, text, re.IGNORECASE))
+
+# Pattern 9: Replace email addresses with EMAIL
+print("\n9. Replace emails:")
+cleaned_text = re.sub(pattern, "EMAIL", text)
+print(cleaned_text)
+
+# Pattern 10: Extract only usernames
+print("\n10. Extract usernames:")
+usernames = re.findall(r"([A-Za-z0-9._%+-]+)@", text)
+print(usernames)
+
+# Pattern 11: Extract domain names
+print("\n11. Extract domains:")
+domains = re.findall(r"@([A-Za-z0-9.-]+\.[A-Za-z]{2,})", text)
+print(domains)
+
+# Pattern 12: Extract unique email addresses
+print("\n12. Unique emails:")
+unique_emails = list(set(emails))
+print(unique_emails)
